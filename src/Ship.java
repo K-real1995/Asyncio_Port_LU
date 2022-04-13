@@ -1,27 +1,37 @@
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
-public class Ship implements Runnable{
+public class Ship {
 
-    public Port port;
+    public String name;
+    public int size;
+    public ArrayList<Product> compartment;
 
-    public Ship(Port port) {
-        this.port = port;
+    public Ship(String name, Integer size, ArrayList<Product> compartment) {
+        this.name = name;
+        this.size = size;
+        this.compartment = compartment;
     }
 
-    public static List<Product> getRandomShip() {
+    public static Ship getRandomShip() {
+        ArrayList<Product> compartment = new ArrayList<>();
+        return new Ship(getRandomShipName(), getRandomSize(), compartment);
+    }
+
+    public static String getRandomShipName() {
+        String[] titles = {"Москва", "Адмирал Кузнецов", "Петр Великий", "Адмирал Нахимов", "Цезарь Кунников", "Варяг",
+                "Дмитрий Донской", "Маршал Устинов", "Адмирал Макаров", "Петр Моргунов", "Адмирал Григорович", "Адмирал Трибуц",
+                "Адмирал Ушаков", "Самум", "Юрий Долгорукий", "Карелия", "Кореец", "Комунна", "Северодвинск", "Иван Грен"};
         Random r = new Random();
-        int x = r.nextInt(1, 7);
-        return Arrays.asList(new Product[x]);
+        int x = r.nextInt(titles.length);
+        return titles[x];
     }
 
-
-    @Override
-    public void run() {
-//        while (Port.piers.size()!=0){
-            port.loadingShip();
-        }
+    public static int getRandomSize() {
+        Random r = new Random();
+        return r.nextInt(1, 10);
     }
+}
+
 
 
